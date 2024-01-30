@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
   entry: "./src/index.tsx",
   resolve: {
@@ -12,6 +14,16 @@ module.exports = {
           loader: "ts-loader",
         },
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      HOST: "localhost",
+      PORT: "8080",
+    }),
+  ],
 };

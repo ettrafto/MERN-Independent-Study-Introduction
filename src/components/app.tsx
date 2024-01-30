@@ -3,38 +3,19 @@ import { React } from "react";
 
 
 import Header from "./header";
+import ContestList from "./contest-list";
 
-const App = () => {
+const App = ({initialData}) => {
+    console.log({initialData});
     
-    const [counter,setCounter] = useState(0);
-
-    useEffect(()=>{
-        const intervalId = setInterval(()=>{
-        setCounter(counter+1);
-        },1000);
-
-        {/*Dependency Array*/}
-        return () => {
-            clearInterval(intervalId);
-        };
-    });
-
-    return  <div>
-
-      {/* using another component within a component */}
-      <Header message="React Intro Website"/>
-        <button
-            onClick = {()=> {
-
-            setCounter(counter+1);
-
-        }}
-            >
-            {counter}
-            </button>
-  
-      </div>;
-    //return React.createElement("Div",null,"Hello React");
-  };
+    
+    return  (
+    <div className="container">
+        <Header message="Naming Contests" />
+        <ContestList contests = { initialData.contests } />
+        
+    </div>
+    );
+   };
 
   export default App

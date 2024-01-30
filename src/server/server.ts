@@ -4,6 +4,7 @@
 import express from "express";
 import os from "os";
 import config,{PORT} from "./config";
+import apiRouter from "./api-router";
 
 console.log({ config });
 console.log({ PORT });
@@ -15,7 +16,9 @@ server.use(express.static("dist"));
 
 server.set("view engine", "ejs");
 
-server.use("/",(req,res)=>{
+server.use("/api", apiRouter);
+
+server.get("/",(req,res)=>{
     res.render("index",{
         initialContent: "Loading..."
 
