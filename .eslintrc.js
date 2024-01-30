@@ -14,6 +14,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "prettier",
   ],
   settings: {
     react: {

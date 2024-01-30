@@ -2,17 +2,29 @@
 //import * as express from "express";
 
 import express from "express";
+import os from "os";
+import config,{PORT} from "./config";
 
-const server = express()
+console.log({ config });
+console.log({ PORT });
+
+
+const server = express();
 
 server.use(express.static("dist"));
 
+server.set("view engine", "ejs");
+
 server.use("/",(req,res)=>{
-    res.send("Hello Express");
+    res.render("index",{
+        initialContent: "Loading..."
+
+    });
 });
 
-server.listen("8080","0.0.0.0",()=>{
+server.listen(config.PORT,config.HOST,()=>{
     console.info(
-        "Express server is listening at http://0.0.0.0:8080"
+        `Express server is listening at ${config.SERVER_URL}`,
+        `Free Mem: ${os.freemem() / 1024 / 1024}`,
     );
 });
