@@ -12,7 +12,7 @@ const App = ({initialData}) => {
     return  (
     <div className="container">
         <Header message="Naming Contests" />
-        <ContestList contests = { initialData.contests } />
+        <ContestList initialContests = { initialData.contests } />
         
     </div>
     );

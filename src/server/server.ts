@@ -1,10 +1,10 @@
-//imports all of express
 //import * as express from "express";
 
 import express from "express";
 import os from "os";
 import config,{PORT} from "./config";
 import apiRouter from "./api-router";
+import serverRender from "./render";
 
 console.log({ config });
 console.log({ PORT });
@@ -18,9 +18,11 @@ server.set("view engine", "ejs");
 
 server.use("/api", apiRouter);
 
-server.get("/",(req,res)=>{
+server.get("/", async (req,res)=>{
+    const {initialMarkup} = await serverRender()
+
     res.render("index",{
-        initialContent: "Loading..."
+        initialMarkup,
 
     });
 });
