@@ -12,6 +12,10 @@ import React from 'react';
 const container = document.getElementById("app");
 const root = createRoot(container);
 
+root.render(<App initialData={(window as any).initialData}/>);
+
+
+
 {/*javascript promise */}
 
 {/*
@@ -22,6 +26,5 @@ axios.get(`${ API_SERVER_URL}/contests`).then((resp) => {
 
 });
 */}
-root.render(<App initialData={{contests: []}}/>);
 
 
