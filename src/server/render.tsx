@@ -1,17 +1,24 @@
 // this file is to seed the client with pure html if javascript is disabled
-import { fetchContests } from "../api-client";
+import { fetchContest, fetchContestList } from "../api-client";
 
 import App from "../components/app";
 import ReactDOMServer from "react-dom/server";
 
-const serverRender = async () => {
-    const contests = await fetchContests();
+const serverRender = async (req) => {
+    
+    const {contestId} = req.params;
+
+    const initialData = contestId
+        ? { currentContest: await fetchContest(contestId) }
+        : { contests: await fetchContestList()};
+    
+
 
     const initialMarkup = ReactDOMServer.renderToString(
-        <App initialData={{contests }}/>,
+        <App initialData={ initialData }/>,
     );
 
-    return {initialMarkup, initialData: { contests }}
+    return { initialMarkup, initialData }
 
 };
 
